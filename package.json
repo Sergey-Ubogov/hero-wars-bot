@@ -1,0 +1,11 @@
+{
+  "name": "hero-wars-bot",
+  "version": "1.0.0",
+  "description": "Bot for the game hero wars on android",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "s.ubogov",
+  "license": "ISC"
+}
