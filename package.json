@@ -13,6 +13,7 @@
     "adbkit": "2.0.17"
   },
   "devDependencies": {
+    "@types/node": "20.5.1",
     "typescript": "5.1.6"
   }
 }
