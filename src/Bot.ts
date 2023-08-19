@@ -3,43 +3,44 @@ import * as adb from "adbkit";
 type BotParams = {
     adbClient: any;
     device: Device;
-    deviceWidth: number;
-    deviceHeight: number;
+    supportedDeviceWidth: number;
+    supportedDeviceHeight: number;
 };
 type Device = {
     id: string;
     type: string;
 };
 export class Bot {
-    private adbClient;
-    private device: Device;
-    private deviceWidth = 0;
-    private deviceHeight = 0;
-    constructor({ adbClient, device, deviceWidth, deviceHeight }: BotParams) {
-        this.adbClient = adbClient;
-        this.device = device;
-        this.deviceWidth = deviceWidth;
-        this.deviceHeight = deviceHeight;
-    }
+    constructor(private params: BotParams) {}
 
     async start() {
-        await this.checkDeviceSize();
+        await this.checkDeviceResolution();
     }
 
-    private async checkDeviceSize() {
-        const output = await this.adbClient
-            .shell(this.device.id, "wm size")
+    private async checkDeviceResolution() {
+        const {
+            adbClient,
+            device,
+            supportedDeviceWidth,
+            supportedDeviceHeight,
+        } = this.params;
+
+        const output = await adbClient
+            .shell(device.id, "wm size")
             .then(adb.util.readAll);
         const wmSizeStr = output.toString().trim();
         const [, , size] = wmSizeStr.split(" ");
         const [width, height] = size.split("x").map(Number);
 
-        if (width !== this.deviceWidth || height !== this.deviceHeight) {
-            console.log(`Бот работает только с расширением ${this.deviceWidth}x${this.deviceHeight}.
-Текущее расширение: ${width}x${height}
+        if (
+            width !== supportedDeviceWidth ||
+            height !== supportedDeviceHeight
+        ) {
+            console.log(`Бот работает только с разрешением ${supportedDeviceWidth}x${supportedDeviceHeight}.
+Текущее разрешение: ${width}x${height}
             `);
         } else {
-            console.log("Расширение девайса подходит!");
+            console.log("Разрешение экрана подходит!");
         }
     }
 }

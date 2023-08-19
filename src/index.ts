@@ -15,8 +15,8 @@ async function main() {
     const bot = new Bot({
         adbClient,
         device,
-        deviceWidth: 1500,
-        deviceHeight: 986,
+        supportedDeviceWidth: 1500,
+        supportedDeviceHeight: 986,
     });
     await bot.start();
 }
