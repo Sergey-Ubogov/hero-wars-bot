@@ -4,16 +4,18 @@
   "description": "Bot for the game hero wars on android",
   "main": "src/index.js",
   "scripts": {
-    "start": "tsc --project tsconfig.json && node ./lib/index.js",
+    "start": "tsc --project tsconfig.json && node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "s.ubogov",
   "license": "ISC",
   "dependencies": {
-    "adbkit": "2.0.17"
+    "adb-ts": "4.0.4",
+    "sharp": "0.32.5"
   },
   "devDependencies": {
     "@types/node": "20.5.1",
+    "@types/sharp": "0.32.0",
     "typescript": "5.1.6"
   }
 }
